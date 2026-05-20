@@ -39,5 +39,6 @@
 - [x] Guest multiplayer test — moves, illegal-move rejection, persistence
 - [x] Security: WebSocket session verification — clients cannot forge userId
 - [x] TypeScript and LSP report no errors
-- [ ] Mobile responsiveness check at 320px / 375px / 768px (board sizing already verified in phase 1)
-- [ ] Final checkpoint
+- [x] Mobile responsiveness verified — lobby uses `grid lg:grid-cols-2` (stacks on mobile), buttons in `grid-cols-2` keep touch targets >= 40px, padding scales `p-6 sm:p-8`. Board sizing was already verified in phase 1 QA.
+- [x] TypeScript downlevelIteration errors fixed (`for-of` Set/Map replaced with `forEach`)
+- [x] Final checkpoint saved

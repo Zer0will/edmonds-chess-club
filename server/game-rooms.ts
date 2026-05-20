@@ -111,9 +111,9 @@ export function getRoom(id: string): Room | undefined {
 
 export function listOpenRooms() {
   const open: Array<{ id: string; variant: Variant; hostName: string; createdAt: number }> = [];
-  for (const room of rooms.values()) {
+  rooms.forEach((room) => {
     const isOpen = !room.white || !room.black;
-    if (!isOpen) continue;
+    if (!isOpen) return;
     const host = room.white ?? room.black;
     open.push({
       id: room.id,
@@ -121,7 +121,7 @@ export function listOpenRooms() {
       hostName: host?.name ?? "Waiting...",
       createdAt: room.createdAt,
     });
-  }
+  });
   return open.sort((a, b) => b.createdAt - a.createdAt);
 }
 
@@ -431,9 +431,9 @@ export function handleConnection(
 setInterval(() => {
   const now = Date.now();
   const TTL = 24 * 60 * 60 * 1000;
-  for (const [id, room] of rooms) {
-    if (now - room.createdAt > TTL && !room.white && !room.black) {
-      rooms.delete(id);
-    }
-  }
+  const stale: string[] = [];
+  rooms.forEach((room, id) => {
+    if (now - room.createdAt > TTL && !room.white && !room.black) stale.push(id);
+  });
+  stale.forEach((id) => rooms.delete(id));
 }, 60 * 60 * 1000).unref?.();

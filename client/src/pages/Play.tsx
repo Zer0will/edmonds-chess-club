@@ -225,7 +225,7 @@ export default function PlayPage() {
                     <button
                       key={d}
                       onClick={() => setDifficulty(d)}
-                      className={`px-3 py-2 rounded-lg border text-xs font-medium capitalize transition-all duration-200 ${
+                      className={`px-3 py-3 min-h-[44px] rounded-lg border text-xs font-medium capitalize transition-all duration-200 ${
                         difficulty === d
                           ? 'border-gold/50 bg-gold/10 text-gold-light'
                           : 'border-border hover:border-gold/30 text-silver-dark'

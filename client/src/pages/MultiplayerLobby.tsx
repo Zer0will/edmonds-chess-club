@@ -200,7 +200,7 @@ export default function MultiplayerLobby() {
               </h2>
               <button
                 onClick={fetchOpenGames}
-                className="p-2 rounded-md text-muted-foreground hover:text-silver transition-colors"
+                className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-muted-foreground hover:text-silver transition-colors"
                 aria-label="Refresh open games"
               >
                 <RefreshCw className={`w-4 h-4 ${refreshing ? "animate-spin" : ""}`} />

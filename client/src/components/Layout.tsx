@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* Auth + Play CTA (Desktop) */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <AuthBlock />
             <Link
               href="/play"
@@ -62,7 +62,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden p-2 text-silver hover:text-gold transition-colors"
+            className="lg:hidden p-2 text-silver hover:text-gold transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
             aria-label="Toggle navigation menu"
@@ -73,7 +73,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-border/50 bg-navy-dark/95 backdrop-blur-xl">
+          <div className="lg:hidden border-t border-border/50 bg-navy-dark/95 backdrop-blur-xl">
             <div className="container py-4 flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link

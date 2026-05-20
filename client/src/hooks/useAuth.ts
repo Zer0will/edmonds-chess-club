@@ -22,7 +22,7 @@ const listeners = new Set<(s: AuthState) => void>();
 
 function setState(next: Partial<AuthState>) {
   cachedState = { ...cachedState, ...next };
-  for (const l of listeners) l(cachedState);
+  listeners.forEach((l) => l(cachedState));
 }
 
 async function fetchMe() {
