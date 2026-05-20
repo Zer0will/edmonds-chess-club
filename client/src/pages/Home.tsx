@@ -52,18 +52,11 @@ const upcomingEvents = [
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
+      {/* Hero Section — the 3D chess scene mounted in App.tsx is the atmosphere */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src={HERO_IMG}
-            alt=""
-            className="w-full h-full object-cover opacity-40"
-            aria-hidden="true"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/60 via-transparent to-background" />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/40 via-transparent to-navy-dark/40" />
+        {/* Subtle vignette so text reads cleanly over the 3D scene */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute inset-0 bg-gradient-radial-vignette" />
         </div>
 
         {/* Hero Content */}

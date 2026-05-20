@@ -16,7 +16,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-atmosphere flex flex-col">
+    <div className="min-h-screen bg-atmosphere flex flex-col relative">
+      <div className="bg-atmosphere-layer" aria-hidden="true" />
       {/* Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-navy-dark/80 backdrop-blur-xl">
         <nav className="container flex items-center justify-between h-16" aria-label="Main navigation">
@@ -106,12 +107,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 pt-16">
+      <main className="flex-1 pt-16 relative z-10">
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 bg-navy-dark/60 backdrop-blur-sm">
+      <footer className="relative z-10 border-t border-border/50 bg-navy-dark/60 backdrop-blur-sm">
         <div className="container py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">

@@ -147,12 +147,23 @@
     }
   }
 
-  /* Atmospheric background with radial gradient */
+  /* Atmospheric background — transparent so the 3D canvas (and bg-atmosphere-layer behind it) show through.
+     Solid color is on `body` to ensure pages without 3D still have the right backdrop. */
   .bg-atmosphere {
-    background: 
+    background-color: transparent;
+  }
+  .bg-atmosphere-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
       radial-gradient(ellipse 80% 60% at 50% 0%, oklch(0.20 0.06 295 / 0.3), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 80%, oklch(0.20 0.04 265 / 0.2), transparent 50%),
-      oklch(0.10 0.025 265);
+      radial-gradient(ellipse 60% 40% at 80% 80%, oklch(0.20 0.04 265 / 0.2), transparent 50%);
+  }
+  /* Radial vignette to darken the center so hero text reads over the 3D scene */
+  .bg-gradient-radial-vignette {
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, oklch(0.10 0.025 265 / 0.65), transparent 80%);
   }
 
   /* Gold text gradient */

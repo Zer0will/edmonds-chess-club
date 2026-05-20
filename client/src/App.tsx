@@ -13,6 +13,7 @@ import MultiplayerLobby from "./pages/MultiplayerLobby";
 import MultiplayerGame from "./pages/MultiplayerGame";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
+import ChessScene3D from "./components/ChessScene3D";
 
 function Router() {
   return (
@@ -37,6 +38,7 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster />
+          <ChessScene3D />
           <Layout>
             <Router />
           </Layout>

@@ -55,10 +55,20 @@ export default function PlayPage() {
   // Handle player move
   const handleMove = useCallback((move: Move) => {
     if (!gameState || gameState.status !== 'playing') return;
+    const prevWhite = gameState.capturedWhite.length;
+    const prevBlack = gameState.capturedBlack.length;
     const newState = makeMove(gameState, move);
     setGameState(newState);
     setLastMove(move);
     setMoveList(prev => [...prev, moveToNotation(move)]);
+    // If a piece was captured, fire the 3D tumble effect (color = captured piece's color)
+    if (typeof window !== 'undefined' && window.__chessScene) {
+      if (newState.capturedBlack.length > prevBlack) {
+        window.__chessScene.triggerCapture('black');
+      } else if (newState.capturedWhite.length > prevWhite) {
+        window.__chessScene.triggerCapture('white');
+      }
+    }
   }, [gameState]);
 
   // Bot move
@@ -71,10 +81,19 @@ export default function PlayPage() {
     const timer = setTimeout(() => {
       const bestMove = getBestMove(gameState, difficulty);
       if (bestMove) {
+        const prevWhite = gameState.capturedWhite.length;
+        const prevBlack = gameState.capturedBlack.length;
         const newState = makeMove(gameState, bestMove);
         setGameState(newState);
         setLastMove(bestMove);
         setMoveList(prev => [...prev, moveToNotation(bestMove)]);
+        if (typeof window !== 'undefined' && window.__chessScene) {
+          if (newState.capturedBlack.length > prevBlack) {
+            window.__chessScene.triggerCapture('black');
+          } else if (newState.capturedWhite.length > prevWhite) {
+            window.__chessScene.triggerCapture('white');
+          }
+        }
       }
       setIsThinking(false);
     }, 300 + Math.random() * 400); // Small delay for natural feel
