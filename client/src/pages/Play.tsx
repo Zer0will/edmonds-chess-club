@@ -4,7 +4,7 @@
  * Supports standard chess and half-chess
  */
 import { useState, useCallback, useEffect, useRef } from "react";
-import { useSearch } from "wouter";
+import { useSearch, Link } from "wouter";
 import ChessBoard from "@/components/ChessBoard";
 import {
   createInitialState,
@@ -138,9 +138,17 @@ export default function PlayPage() {
       <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12">
         <div className="container max-w-lg mx-auto px-4">
           <div className="glass-card rounded-2xl p-8 sm:p-10">
-            <h1 className="font-display text-3xl font-bold text-gold-gradient text-center mb-8">
+            <h1 className="font-display text-3xl font-bold text-gold-gradient text-center mb-3">
               New Game
             </h1>
+            <div className="mb-7 text-center">
+              <Link
+                href="/play/online"
+                className="inline-flex items-center gap-2 text-sm text-purple-light hover:text-gold-light underline-offset-4 hover:underline transition-colors"
+              >
+                Or play online vs another club member →
+              </Link>
+            </div>
 
             {/* Variant Selection */}
             <div className="mb-6">

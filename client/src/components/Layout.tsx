@@ -1,13 +1,14 @@
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
-import { Menu, X, Crown } from "lucide-react";
+import { Menu, X, Crown, LogOut, User } from "lucide-react";
+import { useAuth, getLoginUrl } from "@/hooks/useAuth";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/play", label: "Play" },
   { href: "/variants", label: "Variants" },
   { href: "/about", label: "About" },
-  { href: "/stats", label: "Stats" },
+  { href: "/stats", label: "Leaderboard" },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -48,8 +49,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             ))}
           </div>
 
-          {/* Play CTA (Desktop) */}
-          <div className="hidden md:block">
+          {/* Auth + Play CTA (Desktop) */}
+          <div className="hidden md:flex items-center gap-3">
+            <AuthBlock />
             <Link
               href="/play"
               className="px-5 py-2 rounded-md bg-gold text-navy-dark font-semibold text-sm transition-all duration-200 hover:bg-gold-light btn-press"
@@ -95,6 +97,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               >
                 Play Now
               </Link>
+              <div className="pt-2 border-t border-border/30 mt-2">
+                <AuthBlock mobile onAction={() => setMobileMenuOpen(false)} />
+              </div>
             </div>
           </div>
         )}
@@ -129,6 +134,73 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function AuthBlock({ mobile = false, onAction }: { mobile?: boolean; onAction?: () => void }) {
+  const { user, loading, isAuthenticated, logout } = useAuth();
+
+  if (loading) {
+    return (
+      <div className={mobile ? "px-4 py-3 text-sm text-muted-foreground" : "text-sm text-muted-foreground"}>
+        ...
+      </div>
+    );
+  }
+
+  if (!isAuthenticated || !user) {
+    return (
+      <a
+        href={getLoginUrl()}
+        onClick={onAction}
+        className={
+          mobile
+            ? "flex items-center justify-center gap-2 px-4 py-3 rounded-md border border-gold/40 text-gold-light font-medium"
+            : "flex items-center gap-2 px-4 py-2 rounded-md border border-gold/40 text-gold-light text-sm font-medium hover:bg-gold/10 transition-colors"
+        }
+      >
+        <User className="w-4 h-4" />
+        Sign In
+      </a>
+    );
+  }
+
+  return (
+    <div className={mobile ? "flex flex-col gap-2" : "flex items-center gap-3"}>
+      <Link
+        href="/profile"
+        onClick={onAction}
+        className={
+          mobile
+            ? "flex items-center gap-3 px-4 py-3 rounded-md bg-white/5 border border-border/40"
+            : "flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/5 border border-border/40 hover:bg-white/10 transition-colors"
+        }
+      >
+        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple/40 to-gold/40 flex items-center justify-center text-xs font-bold text-gold-light">
+          {user.name.charAt(0).toUpperCase()}
+        </div>
+        <div className={mobile ? "flex-1" : "hidden lg:flex flex-col"}>
+          <span className="text-sm text-silver leading-tight">{user.name}</span>
+          <span className="text-xs text-gold/70 leading-tight">{user.rating} • {user.wins}W</span>
+        </div>
+      </Link>
+      <button
+        type="button"
+        onClick={() => {
+          logout();
+          onAction?.();
+        }}
+        className={
+          mobile
+            ? "flex items-center justify-center gap-2 px-4 py-3 rounded-md text-sm text-muted-foreground hover:text-silver border border-border/40"
+            : "p-2 rounded-md text-muted-foreground hover:text-silver hover:bg-white/5 transition-colors"
+        }
+        aria-label="Sign out"
+      >
+        <LogOut className="w-4 h-4" />
+        {mobile && <span>Sign Out</span>}
+      </button>
     </div>
   );
 }
