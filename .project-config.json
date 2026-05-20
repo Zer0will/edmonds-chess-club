@@ -1,0 +1,35 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [],
+  "dev_command": "pnpm run dev",
+  "env_vars": {},
+  "experiments": null,
+  "git_remote": {
+    "repo_url": "s3://vida-prod-gitrepo/webdev-git/90669572/iXh5exPpYgD5xJmVVqVMmV",
+    "access_key_id": "ASIAZV3A2ECZBLJJQ6UR",
+    "secret_access_key": "kz7/stZDP1Oi9YlcUn/KdMjYCnNFKRM5hWk871rX",
+    "session_token": "IQoJb3JpZ2luX2VjEBsaCXVzLWVhc3QtMSJIMEYCIQCDaesfXHRCOGFYyULWJWySR7G+MhIA3K+ImX9FtYFmtQIhAI/RAmgVDpxW9Z9p2RRjXRE9yt2bz00R6rW7HYy9d6E/KusDCOT//////////wEQBBoMNjY1Mzg2MDk4ODY2Igx2fA6ic6T5BvWow10qvwM6fZenJsuIiz3sT1QF1UciX0giUc2jV1TDJXOI0eoXVq5X/rRrd6CsU3vGEegHqTTywK8Z8Peg4l7tD/mCGMf9maaM/PwLFu2Ry8FdkoWxWxosQ0//Kk8OmudPqVHJXil50HgG8u1bAD6OfBOs1AH29LRYtMu8R0hgZnfHqV9bHUoAT+Y++6GOqY+WgSIpjFK0FQZ17kMm7Vg4WSk/q3CdQDOaVfTyFi1pXeyqQ6IvC56Pf6Kp54oNSVr37JValq1XRgRobuWeQfy71egdJqSGZbdwM2KOR/NrUDSDrbahyuftei5esaN1d85TVZi6DCS+Z0PJ+UvsDDUWwvgoTxZfKzK1aKbsEqBD+MjFSxCZ0AxHMwm7y6ZP13XOfj7tmng2z7zAOTvBydG1axztL4IcPHCDICAf34eo2+fVUhQoLDab858ZlIRczUNkWKwdbxgcA2pSJ+qIFLkdhSOF5VcTd3RLzngSBj3llFIIhEXrf6RDScQIaUjvhYwd/Ze0n8lw9EDiSVfCLMjPzj7SLMZr6yrRLZEkyBx1OKWP+9JKCOY1F3o/Dhef3y48VqKbPvSdVc7hdYhZfCAZ0SJNOZ8w8ca00AY6nAHKTOGSE221e3Ns2a5Laztb1R0NzbsIvMvxMjwv51CwkMB5L8fWEWCBuQ0Jl4vME4c5Wjcc41CinRU79K70SKTo1JYRsp6KjZPpQbiV8KcIAEWUsCIzsxPEw1rLS6yGmUHDcI9J/jN3tw/u6KrzeVPSeMl5qXMRGX/sKH6BXYZYUrawHHqO01IPYEPS+OdAkO39UomjriJVtTakHF0=",
+    "expiration": "2026-05-20T14:58:57.000Z"
+  },
+  "name": "edmonds-chess-club",
+  "path": "/home/ubuntu/edmonds-chess-club",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "PxFVLmKDFjKziiD8hRAXbf",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "W3vLBq7zECCgLWjUnRqBAG",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Talichoco",
+    "OWNER_OPEN_ID": "JdwQzJrQ4KLWpZiFmNPLcx",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "cfe746b4-4a7a-4e96-a46a-b141edb6eba6",
+    "VITE_APP_ID": "iXh5exPpYgD5xJmVVqVMmV",
+    "VITE_APP_LOGO": "",
+    "VITE_APP_TITLE": "Edmonds Chess Club",
+    "VITE_FRONTEND_FORGE_API_KEY": "BDW9D2dRAgLDJMYcdVimHN",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-static",
+  "test_command": "pnpm test"
+}
