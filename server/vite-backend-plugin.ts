@@ -205,7 +205,11 @@ export function backendPlugin(): Plugin {
             const body = await readJsonBody(req);
             const variant = (body.variant as string) === "half-chess" ? "half-chess" : "standard";
             const color = (body.color as string) === "black" ? "black" : "white";
-            const name = session?.name ?? "Guest";
+            const guestName =
+              typeof body.guestName === "string"
+                ? body.guestName.trim().replace(/\s+/g, " ").slice(0, 20)
+                : "";
+            const name = (session?.name ?? guestName) || "Guest";
             const userId = session?.userId ?? null;
             const openId = session?.openId ?? null;
 

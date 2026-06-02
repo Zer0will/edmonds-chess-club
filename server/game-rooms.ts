@@ -97,9 +97,10 @@ export async function createRoom(input: CreateRoomInput): Promise<string> {
 
   // Note: the actual seat assignment happens when the host connects via WS.
   // We track the intended color in a temporary structure on the room itself.
-  (room as Room & { _hostIntent?: { openId: string | null; color: Color } })._hostIntent = {
+  (room as Room & { _hostIntent?: { openId: string | null; color: Color; name: string } })._hostIntent = {
     openId: input.hostOpenId,
     color: input.hostColor,
+    name: input.hostName,
   };
 
   return id;
@@ -198,24 +199,39 @@ export function handleConnection(
         : { userId: null, openId: null, name: msg.name?.trim() || "Guest" };
 
       const hostIntent = (room as Room & {
-        _hostIntent?: { openId: string | null; color: Color };
+        _hostIntent?: { openId: string | null; color: Color; name: string };
       })._hostIntent;
 
       // Slot assignment:
-      // 1. If host-intent exists and this user matches → assign to host's chosen color
+      // 1. If host-intent exists and this user matches → assign to host's chosen color.
+      //    Authenticated hosts match by session openId. Guest hosts do not have a
+      //    stable token, so the first guest WebSocket to enter an empty room is
+      //    treated as the host after the create API redirects them to the room.
       // 2. Else fill open seat (white first, then black)
       // 3. Else become spectator
-      const isHost = hostIntent && hostIntent.openId && hostIntent.openId === identity.openId;
+      const emptyRoom = !room.white && !room.black;
+      const isAuthenticatedHost = !!(
+        hostIntent?.openId && identity.openId && hostIntent.openId === identity.openId
+      );
+      const isGuestHost = !!(hostIntent && !hostIntent.openId && emptyRoom);
+      const isHost = isAuthenticatedHost || isGuestHost;
 
       if (isHost && hostIntent) {
         const color = hostIntent.color;
+        const hostPlayer = {
+          ws,
+          ...identity,
+          name: isGuestHost ? hostIntent.name : identity.name,
+          color,
+        };
         if (color === "white" && !room.white) {
-          room.white = { ws, ...identity, color };
+          room.white = hostPlayer;
           currentPlayer = room.white;
         } else if (color === "black" && !room.black) {
-          room.black = { ws, ...identity, color };
+          room.black = hostPlayer;
           currentPlayer = room.black;
         }
+        delete (room as Room & { _hostIntent?: unknown })._hostIntent;
       } else if (!room.white) {
         room.white = { ws, ...identity, color: "white" };
         currentPlayer = room.white;
